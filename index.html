@@ -3,47 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Portfolio</title>
+    <title>My Professional Dashboard</title>
     <style>
-        /* This section makes your website look beautiful */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f0f2f5; margin: 0; padding: 0; }
-        .container { max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        .welcome-banner { background: linear-gradient(to right, #4a4e69, #22223b); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: left; }
         
-        img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #007bff; margin-bottom: 15px; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         
-        h1 { color: #222; margin-bottom: 5px; }
-        .info { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
+        /* আপনার ছবির মত কার্ড ডিজাইন */
+        .card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid #007bff; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 50px; margin-bottom: 10px; }
+        .card h3 { margin: 10px 0; font-size: 18px; color: #333; }
         
-        .social-links h3 { color: #333; margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; }
-        .btn { display: block; background: #007bff; color: white; margin: 12px 0; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: 600; transition: 0.3s; }
-        .btn:hover { background: #0056b3; transform: scale(1.02); }
-        .insta { background: #E1306C; } /* Instagram Color */
-        .fb { background: #1877F2; }    /* Facebook Color */
+        .social-btn { display: block; background: #007bff; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 8px; font-weight: bold; }
+        .insta { background: #e1306c; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- 1. Replace 'my-profile.jpg' with your actual photo filename -->
-    <img src="jilanpic.jpg" alt="My Profile Picture">
-    
-    <!-- 2. Personal Information -->
-    <h1>Your Full Name</h1>
-    <div class="info">
-        <p>📍 <b>Address:</b> Your City, Country</p>
-        <p>🎨 <b>Hobbies:</b> Photography, Traveling, Music</p>
-        <p><b>About Me:</b> Hello! I am a passionate individual who loves exploring new things and connecting with people.</p>
+    <div class="welcome-banner">
+        <h2>Hello, Monaemul Islam Jilan</h2>
+        <p>Welcome to my personal dashboard portfolio!</p>
     </div>
 
-    <!-- 3. Social Media Links -->
-    <div class="social-links">
-        <h3>Connect With Me</h3>
-        
-        <!-- Replace the '#' with your actual profile links -->
-        <a href="https://facebook.com" target="_blank" class="btn fb">Facebook</a>
-        <a href="https://instagram.com" target="_blank" class="btn insta">Instagram</a>
+    <div class="grid-container">
+        <!-- Profile Card -->
+        <div class="card" style="border-top-color: #6c5ce7;">
+            <img src="your-pic.jpg" style="width: 80px; border-radius: 50%;" alt="Me">
+            <h3>My Profile</h3>
+            <p>Dhaka, Bangladesh</p>
+        </div>
+
+        <!-- Hobby Card -->
+        <div class="card" style="border-top-color: #00b894;">
+            <h3>Hobbies</h3>
+            <p>Coding, Travel & Music</p>
+        </div>
+
+        <!-- Facebook Card -->
+        <div class="card" style="border-top-color: #0984e3;">
+            <h3>Facebook</h3>
+            <a href="https://facebook.com" target="_blank" class="social-btn">Visit Profile</a>
+        </div>
+
+        <!-- Instagram Card -->
+        <div class="card" style="border-top-color: #fd79a8;">
+            <h3>Instagram</h3>
+            <a href="https://instagram.com" target="_blank" class="social-btn insta">Follow Me</a>
+        </div>
     </div>
-</div>
 
 </body>
 </html>
