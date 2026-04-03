@@ -3,56 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Professional Dashboard</title>
+    <title>Monaemul Islam Jilan | Portfolio</title>
+    <!-- Animation Library -->
+    <link href="https://unpkg.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
-        .welcome-banner { background: linear-gradient(to right, #4a4e69, #22223b); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; text-align: left; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        /* Educational Background with Floating Icons */
+        body { 
+            background: #0f172a; 
+            color: white;
+            overflow-x: hidden;
+            background-image: url('https://transparenttextures.com'); /* শিক্ষা সংক্রান্ত হালকা প্যাটার্ন */
+        }
+
+        /* Intro Animation */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #1e293b, #334155);
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; color: #38bdf8; }
+        .hero p { font-size: 1.2rem; opacity: 0.8; }
+
+        /* Dashboard Grid */
+        .container { max-width: 1100px; margin: -50px auto 50px; padding: 20px; }
         
-        /* আপনার ছবির মত কার্ড ডিজাইন */
-        .card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid #007bff; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 50px; margin-bottom: 10px; }
-        .card h3 { margin: 10px 0; font-size: 18px; color: #333; }
-        
-        .social-btn { display: block; background: #007bff; color: white; text-decoration: none; padding: 10px; margin-top: 10px; border-radius: 8px; font-weight: bold; }
-        .insta { background: #e1306c; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            background: rgba(56, 189, 248, 0.1);
+            border-color: #38bdf8;
+        }
+
+        .card i { font-size: 40px; margin-bottom: 15px; color: #38bdf8; }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #38bdf8;
+            color: #0f172a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: white; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; opacity: 0.5; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <div class="welcome-banner">
-        <h2>Hello, Monaemul Islam Jilan</h2>
-        <p>Welcome to my personal dashboard portfolio!</p>
+    <!-- Intro Section -->
+    <section class="hero">
+        <h1 data-aos="zoom-in" data-aos-duration="1500">Hello, I'm Jilan</h1>
+        <p data-aos="fade-up" data-aos-delay="500">Welcome to my Digital Dashboard</p>
+        <div style="margin-top: 30px;" data-aos="fade-up" data-aos-delay="800">
+            <i class="fas fa-chevron-down" style="font-size: 24px; animation: bounce 2s infinite;"></i>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="grid">
+            <!-- Profile -->
+            <div class="card" data-aos="fade-right">
+                <i class="fas fa-user-graduate"></i>
+                <h3>About Me</h3>
+                <p>Dedicated Student & Tech Enthusiast.</p>
+            </div>
+
+            <!-- Hobby -->
+            <div class="card" data-aos="fade-up">
+                <i class="fas fa-book-open"></i>
+                <h3>Education</h3>
+                <p>Learning new technologies every day.</p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="card" data-aos="fade-left">
+                <i class="fab fa-facebook"></i>
+                <h3>Social Media</h3>
+                <a href="https://facebook.com" target="_blank" class="btn">Connect FB</a>
+                <a href="https://instagram.com" target="_blank" class="btn" style="background:#e1306c; color:white;">Follow Insta</a>
+            </div>
+        </div>
     </div>
 
-    <div class="grid-container">
-        <!-- Profile Card -->
-        <div class="card" style="border-top-color: #6c5ce7;">
-            <img src="your-pic.jpg" style="width: 80px; border-radius: 50%;" alt="Me">
-            <h3>My Profile</h3>
-            <p>Dhaka, Bangladesh</p>
-        </div>
+    <footer>&copy; 2026 Monaemul Islam Jilan | Created with Love</footer>
 
-        <!-- Hobby Card -->
-        <div class="card" style="border-top-color: #00b894;">
-            <h3>Hobbies</h3>
-            <p>Coding, Travel & Music</p>
-        </div>
-
-        <!-- Facebook Card -->
-        <div class="card" style="border-top-color: #0984e3;">
-            <h3>Facebook</h3>
-            <a href="https://facebook.com" target="_blank" class="social-btn">Visit Profile</a>
-        </div>
-
-        <!-- Instagram Card -->
-        <div class="card" style="border-top-color: #fd79a8;">
-            <h3>Instagram</h3>
-            <a href="https://instagram.com" target="_blank" class="social-btn insta">Follow Me</a>
-        </div>
-    </div>
-
+    <!-- Animation Script -->
+    <script src="https://unpkg.com"></script>
+    <script>
+        AOS.init(); // অ্যানিমেশন চালু করার কমান্ড
+    </script>
+    
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
 </body>
 </html>
