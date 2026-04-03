@@ -3,129 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monaemul Islam Jilan | Portfolio</title>
-    <!-- Animation Library -->
-    <link href="https://unpkg.com" rel="stylesheet">
+    <title>Jilan | Spider-Man Gaming Portfolio</title>
     <link rel="stylesheet" href="https://cloudflare.com">
+    <link href="https://unpkg.com" rel="stylesheet">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        :root { --spidey-red: #e62429; --spidey-blue: #005a9c; --dark: #050505; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Bebas Neue', sans-serif; cursor: none; }
         
-        /* Educational Background with Floating Icons */
-        body { 
-            background: #0f172a; 
-            color: white;
-            overflow-x: hidden;
-            background-image: url('https://transparenttextures.com'); /* শিক্ষা সংক্রান্ত হালকা প্যাটার্ন */
+        body { background: var(--dark); color: white; overflow-x: hidden; }
+
+        /*--- 1. Spider-Man Video/Animated Background ---*/
+        .bg-video {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.4;
+            filter: grayscale(30%) contrast(120%);
         }
 
-        /* Intro Animation */
+        /*--- 2. Moving Spider Follower (Mouse Effect) ---*/
+        #spider-cursor {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.1s;
+        }
+
+        /*--- 3. Gaming Logo (Top Left) ---*/
+        .gaming-logo {
+            position: fixed;
+            top: 20px; left: 20px;
+            width: 80px; height: 80px;
+            border: 3px solid var(--spidey-red);
+            box-shadow: 0 0 20px var(--spidey-red);
+            border-radius: 15px;
+            z-index: 1000;
+            overflow: hidden;
+            background: #000;
+        }
+        .gaming-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+        /*--- 4. Hero Section ---*/
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(45deg, #1e293b, #334155);
             text-align: center;
+            background: rgba(0,0,0,0.5);
         }
 
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; color: #38bdf8; }
-        .hero p { font-size: 1.2rem; opacity: 0.8; }
+        .profile-box {
+            width: 200px; height: 200px;
+            border: 4px solid var(--spidey-red);
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 0 30px var(--spidey-red);
+            margin-bottom: 20px;
+            animation: web-swing 4s ease-in-out infinite;
+        }
+        .profile-box img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-        /* Dashboard Grid */
-        .container { max-width: 1100px; margin: -50px auto 50px; padding: 20px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        @keyframes web-swing {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
+        h1 { font-size: 5rem; text-transform: uppercase; color: var(--spidey-red); text-shadow: 3px 3px #000; }
+        p { font-size: 1.5rem; letter-spacing: 2px; }
+
+        /*--- Cards ---*/
+        .container { max-width: 1200px; margin: 0 auto; padding: 50px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { 
+            background: rgba(230, 36, 41, 0.1); 
+            border: 1px solid var(--spidey-red); 
+            padding: 40px; 
+            border-radius: 20px; 
+            text-align: center;
             backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
             transition: 0.4s;
-            cursor: pointer;
         }
+        .card:hover { transform: scale(1.05); background: var(--spidey-red); color: white; }
+        .card i { font-size: 50px; margin-bottom: 15px; }
 
-        .card:hover { 
-            transform: translateY(-10px); 
-            background: rgba(56, 189, 248, 0.1);
-            border-color: #38bdf8;
-        }
-
-        .card i { font-size: 40px; margin-bottom: 15px; color: #38bdf8; }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #38bdf8;
-            color: #0f172a;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn:hover { background: white; }
-
-        /* Footer */
-        footer { text-align: center; padding: 20px; opacity: 0.5; font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <!-- Intro Section -->
+    <!-- Spider Follower Image (মাউসের সাথে ঘুরবে) -->
+    <img src="https://icons8.com" id="spider-cursor" alt="spider">
+
+    <!-- Background Animation (Spider-Man Theme) -->
+    <img class="bg-video" src="https://wallpapers.com" alt="Spidey Background">
+
+    <div class="gaming-logo">
+        <img src="logo.png" alt="Logo"> <!-- এখানে আপনার লোগোর নাম দিন -->
+    </div>
+
     <section class="hero">
-        <h1 data-aos="zoom-in" data-aos-duration="1500">Hello, I'm Jilan</h1>
-        <p data-aos="fade-up" data-aos-delay="500">Welcome to my Digital Dashboard</p>
-        <div style="margin-top: 30px;" data-aos="fade-up" data-aos-delay="800">
-            <i class="fas fa-chevron-down" style="font-size: 24px; animation: bounce 2s infinite;"></i>
+        <div class="profile-box" data-aos="zoom-in">
+            <img src="my-pic.jpg" alt="Jilan"> <!-- এখানে আপনার ছবির নাম দিন -->
         </div>
+        <h1 data-aos="fade-down">JILAN THE GAMER</h1>
+        <p data-aos="fade-up">"With Great Power Comes Great Gaming"</p>
     </section>
 
     <div class="container">
         <div class="grid">
-            <!-- Profile -->
-            <div class="card" data-aos="fade-right">
-                <i class="fas fa-user-graduate"></i>
-                <h3>About Me</h3>
-                <p>Dedicated Student & Tech Enthusiast.</p>
+            <div class="card" data-aos="flip-left">
+                <i class="fas fa-spider"></i>
+                <h3>Skills</h3>
+                <p>Web Dev & Pro Gaming</p>
             </div>
-
-            <!-- Hobby -->
-            <div class="card" data-aos="fade-up">
-                <i class="fas fa-book-open"></i>
-                <h3>Education</h3>
-                <p>Learning new technologies every day.</p>
+            <div class="card" data-aos="flip-up" data-aos-delay="200">
+                <i class="fas fa-mask"></i>
+                <h3>Identity</h3>
+                <p>Monaemul Islam Jilan</p>
             </div>
-
-            <!-- Social Links -->
-            <div class="card" data-aos="fade-left">
+            <div class="card" data-aos="flip-right" data-aos-delay="400">
                 <i class="fab fa-facebook"></i>
-                <h3>Social Media</h3>
-                <a href="https://facebook.com" target="_blank" class="btn">Connect FB</a>
-                <a href="https://instagram.com" target="_blank" class="btn" style="background:#e1306c; color:white;">Follow Insta</a>
+                <h3>Facebook</h3>
+                <a href="https://facebook.com" target="_blank" style="color:white; text-decoration:none;">Visit Profile</a>
             </div>
         </div>
     </div>
 
-    <footer>&copy; 2026 Monaemul Islam Jilan | Created with Love</footer>
-
-    <!-- Animation Script -->
     <script src="https://unpkg.com"></script>
     <script>
-        AOS.init(); // অ্যানিমেশন চালু করার কমান্ড
+        AOS.init();
+
+        // Spider Mouse Tracker Script
+        const spider = document.getElementById('spider-cursor');
+        document.addEventListener('mousemove', (e) => {
+            spider.style.left = e.clientX + 'px';
+            spider.style.top = e.clientY + 'px';
+        });
     </script>
-    
-    <style>
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-    </style>
 </body>
 </html>
