@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jilan | Wireframe Layout</title>
+    <title>Jilan | Digital Profile UI</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        /*--- আপনার দেওয়া মূল ভেরিয়েবল এবং বেসিক স্টাইল ---*/
         :root { 
             --neon-blue: #00d2ff; 
             --neon-red: #ff0055; 
@@ -26,7 +25,7 @@
             background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
         }
 
-        /*--- আপনার ঝুলন্ত মাকড়সা অ্যানিমেশন (অপরিবর্তিত) ---*/
+        /*--- ঝুলন্ত মাকড়সা অ্যানিমেশন ---*/
         .hanging-spider {
             position: fixed; top: -50px; z-index: 1000;
             display: flex; flex-direction: column; align-items: center;
@@ -34,8 +33,8 @@
         }
         .web-line { width: 1px; height: 180px; background: rgba(255, 255, 255, 0.4); }
         .spider-icon {
-            font-size: 35px; color: #ff0055;
-            filter: drop-shadow(0 0 10px #ff0055);
+            font-size: 35px; color: var(--neon-red);
+            filter: drop-shadow(0 0 10px var(--neon-red));
             animation: glow 2s ease-in-out infinite;
         }
         @keyframes swing {
@@ -43,100 +42,163 @@
             50% { transform: translateY(40px) rotate(8deg); }
         }
         @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 5px #ff0055); transform: scale(1); }
-            50% { filter: drop-shadow(0 0 20px #ff0055); transform: scale(1.1); }
+            0%, 100% { filter: drop-shadow(0 0 5px var(--neon-red)); transform: scale(1.1); }
+            50% { filter: drop-shadow(0 0 25px var(--neon-red)); transform: scale(1); }
         }
 
-        /*--- ১. Top Navigation (স্কেচ অনুযায়ী) ---*/
-        .top-nav {
-            height: 80px; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 50px; border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        /*--- হেডার ---*/
+        .header-top {
+            width: 100%; padding: 25px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
         }
-        .nav-tabs { display: flex; gap: 15px; }
-        .tab-box { width: 50px; height: 15px; border: 1px solid var(--neon-blue); opacity: 0.5; }
-        
-        /* আপনার ছবির মতো প্রোফাইল গ্লো */
-        .profile-small {
+        .user-info h1 { font-size: 22px; color: var(--neon-blue); letter-spacing: 2px; }
+        .profile-glow {
             width: 55px; height: 55px; border-radius: 50%;
             border: 2px solid var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
         }
 
-        /*--- ২. Main Layout (Sidebar + Center Content + Right Panel) ---*/
-        .layout-body { display: flex; flex: 1; padding: 20px; gap: 20px; }
+        /*--- মেইন লেআউট ---*/
+        .layout-main { display: flex; flex: 1; padding: 20px; gap: 25px; overflow: hidden; }
 
-        /* Left Sidebar (৫টি আইকন বক্স + gaming id লেখা) */
-        .left-sidebar { width: 80px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .side-box { width: 45px; height: 45px; border: 1px solid var(--neon-blue); cursor: pointer; transition: 0.3s; }
-        .side-box:hover { box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.1); background: rgba(0, 210, 255, 0.1); }
-        .gaming-id-text { writing-mode: vertical-rl; text-transform: uppercase; color: var(--neon-blue); font-weight: bold; margin-top: 15px; font-size: 14px; }
+        /* বাম সাইডবার */
+        .left-side { 
+            width: 140px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            gap: 12px; 
+            padding-bottom: 15px; 
+        }
+        
+        .nav-frame { 
+            width: 100%; height: 38px; 
+            border: 1px solid var(--neon-blue); 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; text-transform: uppercase; color: var(--neon-blue);
+            cursor: pointer; transition: 0.3s; background: rgba(0, 210, 255, 0.05);
+        }
+        .nav-frame:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 12px var(--neon-blue); }
 
-        /* Center Content (আপনার কার্ডগুলো এখানে থাকবে) */
-        .main-content { 
-            flex: 1; display: flex; flex-direction: column; gap: 20px; 
-            justify-content: center; align-items: center;
+        /* গেম আইডি এবং কন্টাক্ট সেকশন */
+        .sidebar-bottom-info { margin-top: 10px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        .id-boxes { display: flex; gap: 6px; }
+        .id-box { width: 14px; height: 14px; border: 1px solid var(--neon-blue); background: rgba(0, 210, 255, 0.1); }
+        .label-text { writing-mode: vertical-rl; text-transform: uppercase; color: var(--neon-blue); font-weight: bold; font-size: 11px; }
+
+        /* নতুন কন্টাক্ট এরিয়া */
+        .contact-frame {
+            border: 1px dashed var(--neon-red);
+            padding: 10px 5px;
+            text-align: center;
+            width: 100%;
+            background: rgba(255, 0, 85, 0.05);
+            animation: contactGlow 3s infinite alternate;
+        }
+        .contact-frame p { font-size: 9px; color: #fff; margin-bottom: 3px; opacity: 0.7; }
+        .contact-frame span { font-size: 10px; color: var(--neon-red); font-weight: bold; }
+
+        @keyframes contactGlow { from { box-shadow: 0 0 5px var(--neon-red); } to { box-shadow: 0 0 15px var(--neon-red); } }
+
+        /* মাঝখানের বড় পরিচয় ফ্রেম */
+        .center-content { 
+            flex: 1; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 10px;
         }
 
-        /* আপনার দেওয়া Dream Card স্টাইল */
-        .dream-card {
-            width: 100%; max-width: 600px;
-            background: rgba(255, 255, 255, 0.03); border-radius: 20px;
-            padding: 30px; text-align: center; position: relative; overflow: hidden;
-            border: 1px solid rgba(0, 210, 255, 0.2); transition: 0.5s;
+        .main-intro-frame {
+            width: 100%;
+            height: 90%;
+            max-width: 700px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-shadow: inset 0 0 30px rgba(0, 210, 255, 0.1), 0 0 20px rgba(0, 210, 255, 0.2);
+            animation: borderPulse 4s infinite;
         }
-        .dream-card:hover { transform: translateY(-5px); box-shadow: 0 0 25px var(--neon-blue); border-color: #fff; }
-        .dream-card h2 { font-size: 22px; color: #fff; letter-spacing: 2px; }
-        .dream-card p { font-size: 14px; color: var(--neon-blue); opacity: 0.7; }
 
-        /* Right Panel (৩টি বক্স + ভার্টিক্যাল বার) */
-        .right-panel { display: flex; gap: 10px; }
-        .small-boxes { display: flex; flex-direction: column; gap: 12px; }
-        .s-box { width: 40px; height: 40px; border: 1px solid var(--neon-red); }
-        .v-bar { width: 25px; height: 100%; border: 1px solid var(--neon-blue); opacity: 0.3; }
+        .intro-text h2 { font-size: 32px; color: #fff; text-shadow: 0 0 15px var(--neon-blue); margin-bottom: 15px; }
+        .intro-text p { font-size: 14px; line-height: 1.6; color: #94a3b8; text-align: center; }
+
+        @keyframes borderPulse {
+            0%, 100% { border-color: var(--neon-blue); }
+            50% { border-color: #fff; box-shadow: 0 0 40px rgba(0, 210, 255, 0.4); }
+        }
+
+        /* ডান প্যানেল */
+        .right-side { display: flex; gap: 10px; }
+        .s-box { width: 35px; height: 35px; border: 1px solid var(--neon-red); margin-bottom: 10px; }
+        .v-bar { width: 20px; height: 100%; border: 1px solid var(--neon-blue); opacity: 0.3; }
 
     </style>
 </head>
 <body>
 
-    <!-- আপনার মাকড়সাগুলো ঠিক আগের জায়গায় থাকবে -->
-    <div class="hanging-spider" style="left: 10%;"><div class="web-line"></div><i class="fas fa-spider spider-icon"></i></div>
-    <div class="hanging-spider" style="right: 15%;"><div class="web-line" style="height: 120px;"></div><i class="fas fa-spider spider-icon"></i></div>
+    <!-- স্পাইডার -->
+    <div class="hanging-spider" style="left: 4%;"><div class="web-line"></div><i class="fas fa-spider spider-icon"></i></div>
 
-    <!-- ১. উপরের বার (Top Nav) -->
-    <header class="top-nav">
-        <div style="width: 55px;"></div> 
-        <div class="nav-tabs">
-            <div class="tab-box"></div><div class="tab-box"></div><div class="tab-box"></div>
+    <!-- হেডার -->
+    <header class="header-top">
+        <div class="user-info">
+            <h1>HEY, IT'S JILAN</h1>
+            <p style="font-size: 11px; opacity: 0.5;">Digital Identity Protocol Activated</p>
         </div>
-        <div class="profile-small"></div>
+        <div class="profile-glow"></div>
     </header>
 
-    <!-- ২. মেইন লেআউট (স্কেচ অনুযায়ী) -->
-    <div class="layout-body">
-        <!-- বাম পাশের সাইডবার -->
-        <aside class="left-sidebar">
-            <div class="side-box"></div><div class="side-box"></div><div class="side-box"></div>
-            <div class="side-box"></div><div class="side-box"></div>
-            <div class="gaming-id-text">GAMING ID</div>
+    <div class="layout-main">
+        <!-- বাম সাইডবার -->
+        <aside class="left-side">
+            <div class="nav-frame">Social</div>
+            <div class="nav-frame">Relatives</div>
+            <div class="nav-frame">Education</div>
+            <div class="nav-frame">Albums</div>
+            <div class="nav-frame">Friends</div>
+            
+            <div class="sidebar-bottom-info">
+                <div class="id-boxes">
+                    <div class="id-box"></div><div class="id-box"></div><div class="id-box"></div>
+                    <div class="id-box"></div><div class="id-box"></div>
+                </div>
+                <div class="label-text">GAMING ID</div>
+
+                <!-- নতুন কন্টাক্ট সেকশন -->
+                <div class="contact-frame">
+                    <p>CONTACT ME</p>
+                    <span>+880 1XXX XXXXXX</span>
+                </div>
+            </div>
         </aside>
 
-        <!-- মাঝখানের কন্টেন্ট (আপনার কার্ড) -->
-        <main class="main-content">
-            <h1 style="color: var(--neon-blue); margin-bottom: 20px;">HEY, IT'S JILAN</h1>
-            
-            <div class="dream-card">
-                <h2>DREAM GAMER</h2>
-                <p>Dominating the battlefield with ZERO skills.</p>
-            </div>
-
-            <div class="dream-card">
-                <h2>SPIDEY SENSE</h2>
-                <p>not peter parker.</p>
+        <!-- মাঝখানের বড় পরিচয় ফ্রেম -->
+        <main class="center-content">
+            <div class="main-intro-frame">
+                <div class="intro-text">
+                    <h2>ABOUT JILAN</h2>
+                    <p>
+                        A passionate gamer and digital enthusiast exploring the boundaries of the virtual world. 
+                        Specialized in dominating battlefields and creating immersive digital experiences. 
+                        Welcome to my universe where skills meet strategy.
+                    </p>
+                </div>
+                <!-- আপনি চাইলে নিচে আপনার আগের কার্ডগুলোও ছোট করে রাখতে পারেন -->
             </div>
         </main>
 
-        <!-- ডান পাশের প্যানেল -->
-        <aside class="right-panel">
-            <div class="small-boxes">
+        <!-- ডান সাইড -->
+        <aside class="right-side">
+            <div class="box-group">
                 <div class="s-box"></div><div class="s-box"></div><div class="s-box"></div>
             </div>
             <div class="v-bar"></div>
@@ -145,4 +207,5 @@
 
 </body>
 </html>
+
 
