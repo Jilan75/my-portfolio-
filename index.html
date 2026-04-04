@@ -6,7 +6,14 @@
     <title>Jilan | drean gamerz</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     
-    <style>
+    <style>        /* আপনার আগের সব স্টাইল এখানে আছে... */
+
+        /* নতুন CSS এখানে পেস্ট করুন */
+        .page { display: none; animation: fadeIn 0.5s ease-in-out forwards; }
+        /* ... বাকি কোড ... */
+
+    </style> <!-- এখানে CSS শেষ -->
+
         :root { 
             --primary-bg: #f0f4f9;
             --sidebar-bg: #e2e8f0;
@@ -197,5 +204,43 @@
         </main>
     </div>
 
+<script>
+    const pages = {
+        'Social': ['Facebook', 'Discord', 'Instagram', 'YouTube'],
+        'Relatives': ['Family Tree', 'Events', 'Contacts'],
+        'Education': ['Schooling', 'Certificates', 'Skills'],
+        'Albums': ['Gaming Highlights', 'Personal', 'Tournaments'],
+        'Friends': ['Team Alpha', 'Steam Buds', 'Discord Squad']
+    };
+
+    function showDetails(category) {
+        document.getElementById('home-page').classList.remove('active');
+        document.getElementById('detail-page').classList.add('active');
+        document.getElementById('page-title').innerText = category.toUpperCase();
+        
+        const grid = document.getElementById('sub-frames');
+        grid.innerHTML = ''; // আগের কন্টেন্ট মুছবে
+
+        pages[category].forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'sub-card';
+            card.innerHTML = `<h3>${item}</h3><p>View Details</p>`;
+            grid.appendChild(card);
+        });
+    }
+
+    function goBack() {
+        document.getElementById('detail-page').classList.remove('active');
+        document.getElementById('home-page').classList.add('active');
+    }
+
+    // বাম পাশের ফ্রেমগুলোতে ক্লিক ইভেন্ট সেট করা
+    document.querySelectorAll('.nav-frame').forEach(frame => {
+        frame.onclick = function() {
+            const name = this.querySelector('span').innerText;
+            showDetails(name);
+        };
+    });
+</script>
 </body>
 </html>
