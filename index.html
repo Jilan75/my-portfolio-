@@ -81,13 +81,7 @@
         }
         .nav-frame:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 12px var(--neon-blue); }
 
-        /* গেম আইডি এবং কন্টাক্ট সেকশন */
-        .sidebar-bottom-info { margin-top: 10px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .id-boxes { display: flex; gap: 6px; }
-        .id-box { width: 14px; height: 14px; border: 1px solid var(--neon-blue); background: rgba(0, 210, 255, 0.1); }
-        .label-text { writing-mode: vertical-rl; text-transform: uppercase; color: var(--neon-blue); font-weight: bold; font-size: 11px; }
-
-        /* নতুন কন্টাক্ট এরিয়া */
+        /* কন্টাক্ট ফ্রেম (বাম পাশে থাকবে) */
         .contact-frame {
             border: 1px dashed var(--neon-red);
             padding: 10px 5px;
@@ -95,30 +89,30 @@
             width: 100%;
             background: rgba(255, 0, 85, 0.05);
             animation: contactGlow 3s infinite alternate;
+            margin-top: 10px;
         }
-        .contact-frame p { font-size: 9px; color: #fff; margin-bottom: 3px; opacity: 0.7; }
+        .contact-frame p { font-size: 9px; color: #fff; opacity: 0.7; }
         .contact-frame span { font-size: 10px; color: var(--neon-red); font-weight: bold; }
-
         @keyframes contactGlow { from { box-shadow: 0 0 5px var(--neon-red); } to { box-shadow: 0 0 15px var(--neon-red); } }
 
-        /* মাঝখানের বড় পরিচয় ফ্রেম */
+        /* মাঝখানের কন্টেন্ট এরিয়া */
         .center-content { 
             flex: 1; 
             display: flex; 
+            flex-direction: column; /* ওপর-নিচ সাজানোর জন্য */
             justify-content: center; 
             align-items: center; 
-            padding: 10px;
+            gap: 25px; /* ফ্রেম ও আইডির মাঝখানের ফাঁকা জায়গা */
         }
 
         .main-intro-frame {
             width: 100%;
-            height: 90%;
+            height: 70%; /* উচ্চতা কিছুটা কমানো হয়েছে আইডি বসার জায়গা দিতে */
             max-width: 700px;
             border: 2px solid var(--neon-blue);
             border-radius: 30px;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(5px);
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -136,6 +130,13 @@
             50% { border-color: #fff; box-shadow: 0 0 40px rgba(0, 210, 255, 0.4); }
         }
 
+        /* গেমিং আইডি সেকশন (এখন মাঝখানে) */
+        .gaming-id-section { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .id-boxes { display: flex; gap: 10px; }
+        .id-box { width: 20px; height: 20px; border: 1px solid var(--neon-blue); background: rgba(0, 210, 255, 0.1); transition: 0.3s; }
+        .id-box:hover { background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.1); }
+        .label-text { font-size: 14px; font-weight: bold; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; }
+
         /* ডান প্যানেল */
         .right-side { display: flex; gap: 10px; }
         .s-box { width: 35px; height: 35px; border: 1px solid var(--neon-red); margin-bottom: 10px; }
@@ -145,10 +146,8 @@
 </head>
 <body>
 
-    <!-- স্পাইডার -->
     <div class="hanging-spider" style="left: 4%;"><div class="web-line"></div><i class="fas fa-spider spider-icon"></i></div>
 
-    <!-- হেডার -->
     <header class="header-top">
         <div class="user-info">
             <h1>HEY, IT'S JILAN</h1>
@@ -158,7 +157,6 @@
     </header>
 
     <div class="layout-main">
-        <!-- বাম সাইডবার -->
         <aside class="left-side">
             <div class="nav-frame">Social</div>
             <div class="nav-frame">Relatives</div>
@@ -166,23 +164,15 @@
             <div class="nav-frame">Albums</div>
             <div class="nav-frame">Friends</div>
             
-            <div class="sidebar-bottom-info">
-                <div class="id-boxes">
-                    <div class="id-box"></div><div class="id-box"></div><div class="id-box"></div>
-                    <div class="id-box"></div><div class="id-box"></div>
-                </div>
-                <div class="label-text">GAMING ID</div>
-
-                <!-- নতুন কন্টাক্ট সেকশন -->
-                <div class="contact-frame">
-                    <p>CONTACT ME</p>
-                    <span>+880 1XXX XXXXXX</span>
-                </div>
+            <!-- কন্টাক্ট সেকশনটি এখানে রয়ে গেল -->
+            <div class="contact-frame">
+                <p>CONTACT ME</p>
+                <span>+880 1XXX XXXXXX</span>
             </div>
         </aside>
 
-        <!-- মাঝখানের বড় পরিচয় ফ্রেম -->
         <main class="center-content">
+            <!-- মেইন পরিচয় ফ্রেম -->
             <div class="main-intro-frame">
                 <div class="intro-text">
                     <h2>ABOUT JILAN</h2>
@@ -192,11 +182,18 @@
                         Welcome to my universe where skills meet strategy.
                     </p>
                 </div>
-                <!-- আপনি চাইলে নিচে আপনার আগের কার্ডগুলোও ছোট করে রাখতে পারেন -->
+            </div>
+
+            <!-- গেমিং আইডি এখন ঠিক ফ্রেমের নিচে -->
+            <div class="gaming-id-section">
+                <div class="id-boxes">
+                    <div class="id-box"></div><div class="id-box"></div><div class="id-box"></div>
+                    <div class="id-box"></div><div class="id-box"></div>
+                </div>
+                <div class="label-text">GAMING ID</div>
             </div>
         </main>
 
-        <!-- ডান সাইড -->
         <aside class="right-side">
             <div class="box-group">
                 <div class="s-box"></div><div class="s-box"></div><div class="s-box"></div>
@@ -207,5 +204,3 @@
 
 </body>
 </html>
-
-
