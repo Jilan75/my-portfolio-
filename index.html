@@ -6,6 +6,8 @@
     <title>Jilan | Dream Gamerz</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Google Fonts: Orbitron for Gaming Look -->
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
         :root { 
@@ -17,7 +19,7 @@
             --gradient-main: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background-color: var(--primary-bg); 
@@ -26,6 +28,13 @@
             display: flex;
             overflow: hidden;
             position: relative;
+            font-family: 'Rajdhani', sans-serif; /* General Text Font */
+        }
+
+        h1, h2, h3, .welcome-banner h2, .label-text {
+            font-family: 'Orbitron', sans-serif; /* Gaming Font */
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /*--- ব্যাকগ্রাউন্ড অ্যানিমেশন স্টাইল ---*/
@@ -76,7 +85,7 @@
         .nav-item {
             padding: 12px 15px; margin-bottom: 5px; border-radius: 10px;
             cursor: pointer; transition: 0.3s; display: flex; align-items: center;
-            gap: 12px; color: #475569; text-transform: capitalize;
+            gap: 12px; color: #475569; font-weight: bold;
         }
         .nav-item.active, .nav-item:hover { background: #fff; color: var(--accent-blue); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
@@ -133,7 +142,6 @@
         </div>
     </div>
 
-    <!-- সাইডবার -->
     <aside class="sidebar">
         <div class="profile-section">
             <div class="profile-img"><i class="fas fa-user-ninja" style="font-size: 30px; color: var(--accent-blue);"></i></div>
@@ -149,7 +157,6 @@
         </ul>
     </aside>
 
-    <!-- মেইন কন্টেন্ট -->
     <div class="main-content">
         <div class="welcome-banner">
             <div>
@@ -159,11 +166,10 @@
             <i class="fas fa-gamepad" style="font-size: 40px; color: #fff;"></i>
         </div>
 
-        <!-- হোম পেজ -->
         <div id="home-page" class="page active">
             <main class="about-frame">
                 <h2 style="color: var(--accent-blue); margin-bottom: 15px;">Its JILAN</h2>
-                <p style="color: #64748b; line-height: 1.8;">
+                <p style="color: #64748b; line-height: 1.8; font-weight: 500;">
                     "A noob gamer dominating the battlefield with zero skills, exploring something new and curious about the unknown."
                 </p>
                 <div class="gaming-id-section">
@@ -175,11 +181,10 @@
             </main>
         </div>
 
-        <!-- ডিটেইলস পেজ -->
         <div id="detail-page" class="page">
             <h2 id="page-title" style="color: var(--accent-blue);">DETAILS</h2>
             <div class="sub-frame-grid" id="sub-frames"></div>
-            <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: var(--accent-blue); color: #fff; border: none; border-radius: 5px;">Back to Dashboard</button>
+            <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: var(--accent-blue); color: #fff; border: none; border-radius: 5px; font-family: 'Orbitron';">Back to Dashboard</button>
         </div>
     </div>
 
@@ -187,8 +192,13 @@
         // ব্যাকগ্রাউন্ড পার্টিকেল অ্যানিমেশন
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
         let particles = [];
         class Particle {
             constructor() {
@@ -216,7 +226,6 @@
             requestAnimationFrame(animate);
         }
         init(); animate();
-        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
         // পেজ নেভিগেশন লজিক
         const pagesData = {
@@ -240,7 +249,7 @@
             pagesData[category].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'sub-card';
-                card.innerHTML = `<i class="fas fa-star" style="margin-bottom:10px;"></i><h3>${item}</h3><p>View Info</p>`;
+                card.innerHTML = `<i class="fas fa-star" style="margin-bottom:10px; color: #3b82f6;"></i><h3>${item}</h3><p style="font-size: 13px; opacity: 0.7;">View Information</p>`;
                 grid.appendChild(card);
             });
         }
