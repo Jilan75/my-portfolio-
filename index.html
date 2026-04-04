@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jilan | Dream Gamerz</title>
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
         :root { 
-            --primary-bg: transparent; /* অ্যানিমেশন দেখার জন্য */
+            --primary-bg: #020617;
             --sidebar-bg: #e2e8f0;
             --accent-blue: #3b82f6;
             --text-main: #1e293b;
             --card-white: rgba(255, 255, 255, 0.9);
-            --gradient-main: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(76, 29, 149, 0.9) 100%);
+            --gradient-main: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         
         body { 
-            background-color: #020617; 
+            background-color: var(--primary-bg); 
             color: var(--text-main); 
             height: 100vh;
             display: flex;
@@ -28,7 +28,7 @@
             position: relative;
         }
 
-        /*--- অ্যানিমেশন কন্টেইনার স্টাইল ---*/
+        /*--- ব্যাকগ্রাউন্ড অ্যানিমেশন স্টাইল ---*/
         #animation-container {
             position: fixed;
             top: 0; left: 0;
@@ -89,7 +89,7 @@
         .welcome-banner {
             background: var(--gradient-main); padding: 30px; border-radius: 20px;
             color: white; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); animation: slideDown 0.8s ease-out;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); animation: slideDown 0.8s ease-out;
         }
 
         .page { display: none; animation: fadeIn 0.5s ease-in-out forwards; width: 100%; }
@@ -113,7 +113,8 @@
 
         .gaming-id-section { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
         .id-boxes { display: flex; gap: 12px; }
-        .id-box { width: 35px; height: 35px; background: #fff; border: 2px solid var(--accent-blue); border-radius: 8px; cursor: pointer; }
+        .id-box { width: 35px; height: 35px; background: #fff; border: 2px solid var(--accent-blue); border-radius: 8px; transition: 0.3s; cursor: pointer; }
+        .id-box:hover { background: var(--accent-blue); transform: scale(1.1) rotate(5deg); }
 
         @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
@@ -121,7 +122,7 @@
 </head>
 <body>
 
-    <!-- ব্যাকগ্রাউন্ড অ্যানিমেশন -->
+    <!-- ব্যাকগ্রাউন্ড অ্যানিমেশন লেয়ার -->
     <div id="animation-container">
         <canvas id="particleCanvas"></canvas>
         <div class="floating-formulas">
@@ -158,6 +159,7 @@
             <i class="fas fa-gamepad" style="font-size: 40px; color: #fff;"></i>
         </div>
 
+        <!-- হোম পেজ -->
         <div id="home-page" class="page active">
             <main class="about-frame">
                 <h2 style="color: var(--accent-blue); margin-bottom: 15px;">Its JILAN</h2>
@@ -165,20 +167,22 @@
                     "A noob gamer dominating the battlefield with zero skills, exploring something new and curious about the unknown."
                 </p>
                 <div class="gaming-id-section">
-                    <div class="id-boxes"><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div></div>
+                    <div class="id-boxes">
+                        <div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div>
+                    </div>
                     <div class="label-text" style="font-weight: bold; color: var(--accent-blue); margin-top: 10px;">GAMING ID</div>
                 </div>
             </main>
         </div>
 
+        <!-- ডিটেইলস পেজ -->
         <div id="detail-page" class="page">
-            <h2 id="page-title" style="color: var(--accent-blue); text-shadow: 0 0 10px #fff;">DETAILS</h2>
+            <h2 id="page-title" style="color: var(--accent-blue);">DETAILS</h2>
             <div class="sub-frame-grid" id="sub-frames"></div>
             <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: var(--accent-blue); color: #fff; border: none; border-radius: 5px;">Back to Dashboard</button>
         </div>
     </div>
 
-    <!-- স্ক্রিপ্ট সেকশন -->
     <script>
         // ব্যাকগ্রাউন্ড পার্টিকেল অ্যানিমেশন
         const canvas = document.getElementById('particleCanvas');
@@ -214,18 +218,20 @@
         init(); animate();
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-        // পেজ নেভিগেশন ফাংশন
+        // পেজ নেভিগেশন লজিক
         const pagesData = {
             'Relatives': ['Family Tree', 'Events', 'Contacts'],
             'Education': ['Schooling', 'Certificates', 'Skills'],
             'Albums': ['Gaming Highlights', 'Personal', 'Tournaments'],
             'Friends': ['Team Alpha', 'Steam Buds', 'Discord Squad']
         };
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId + '-page').classList.add('active');
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         }
+
         function showDetails(category) {
             showPage('detail');
             document.getElementById('page-title').innerText = category.toUpperCase();
@@ -234,7 +240,7 @@
             pagesData[category].forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'sub-card';
-                card.innerHTML = `<h3>${item}</h3><p>Click for Info</p>`;
+                card.innerHTML = `<i class="fas fa-star" style="margin-bottom:10px;"></i><h3>${item}</h3><p>View Info</p>`;
                 grid.appendChild(card);
             });
         }
