@@ -3,203 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jilan | Digital Profile UI</title>
+    <title>Jilan | Premium Dashboard UI</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
         :root { 
-            --neon-blue: #00d2ff; 
-            --neon-red: #ff0055; 
-            --dark-bg: #020617; 
+            --primary-bg: #f0f4f9;
+            --sidebar-bg: #e2e8f0;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-main: #1e293b;
+            --card-white: rgba(255, 255, 255, 0.9);
+            --gradient-main: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         
         body { 
-            background-color: var(--dark-bg); 
-            color: white; 
+            background-color: var(--primary-bg); 
+            color: var(--text-main); 
             height: 100vh;
             display: flex;
-            flex-direction: column;
             overflow: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
         }
 
-        /*--- ঝুলন্ত মাকড়সা অ্যানিমেশন ---*/
-        .hanging-spider {
-            position: fixed; top: -50px; z-index: 1000;
-            display: flex; flex-direction: column; align-items: center;
-            animation: swing 4s ease-in-out infinite;
-        }
-        .web-line { width: 1px; height: 180px; background: rgba(255, 255, 255, 0.4); }
-        .spider-icon {
-            font-size: 35px; color: var(--neon-red);
-            filter: drop-shadow(0 0 10px var(--neon-red));
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes swing {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(40px) rotate(8deg); }
-        }
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 5px var(--neon-red)); transform: scale(1.1); }
-            50% { filter: drop-shadow(0 0 25px var(--neon-red)); transform: scale(1); }
-        }
-
-        /*--- হেডার ---*/
-        .header-top {
-            width: 100%; padding: 25px 50px;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
-        }
-        .user-info h1 { font-size: 22px; color: var(--neon-blue); letter-spacing: 2px; }
-        .profile-glow {
-            width: 55px; height: 55px; border-radius: 50%;
-            border: 2px solid var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
-        }
-
-        /*--- মেইন লেআউট ---*/
-        .layout-main { display: flex; flex: 1; padding: 20px; gap: 25px; overflow: hidden; }
-
-        /* বাম সাইডবার */
-        .left-side { 
-            width: 140px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-end; 
-            gap: 12px; 
-            padding-bottom: 15px; 
-        }
-        
-        .nav-frame { 
-            width: 100%; height: 38px; 
-            border: 1px solid var(--neon-blue); 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 9px; text-transform: uppercase; color: var(--neon-blue);
-            cursor: pointer; transition: 0.3s; background: rgba(0, 210, 255, 0.05);
-        }
-        .nav-frame:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 12px var(--neon-blue); }
-
-        /* কন্টাক্ট ফ্রেম (বাম পাশে থাকবে) */
-        .contact-frame {
-            border: 1px dashed var(--neon-red);
-            padding: 10px 5px;
-            text-align: center;
-            width: 100%;
-            background: rgba(255, 0, 85, 0.05);
-            animation: contactGlow 3s infinite alternate;
-            margin-top: 10px;
-        }
-        .contact-frame p { font-size: 9px; color: #fff; opacity: 0.7; }
-        .contact-frame span { font-size: 10px; color: var(--neon-red); font-weight: bold; }
-        @keyframes contactGlow { from { box-shadow: 0 0 5px var(--neon-red); } to { box-shadow: 0 0 15px var(--neon-red); } }
-
-        /* মাঝখানের কন্টেন্ট এরিয়া */
-        .center-content { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; /* ওপর-নিচ সাজানোর জন্য */
-            justify-content: center; 
-            align-items: center; 
-            gap: 25px; /* ফ্রেম ও আইডির মাঝখানের ফাঁকা জায়গা */
-        }
-
-        .main-intro-frame {
-            width: 100%;
-            height: 70%; /* উচ্চতা কিছুটা কমানো হয়েছে আইডি বসার জায়গা দিতে */
-            max-width: 700px;
-            border: 2px solid var(--neon-blue);
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(5px);
+        /*--- Sidebar Styles ---*/
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            padding: 20px;
+            border-right: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .profile-section {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 0 auto 10px;
+            border: 3px solid var(--accent-blue);
+            padding: 2px;
+        }
+
+        .nav-menu { list-style: none; flex: 1; }
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
             align-items: center;
+            gap: 12px;
+            color: #475569;
+        }
+        .nav-item.active, .nav-item:hover {
+            background: #fff;
+            color: var(--accent-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /*--- Main Content Area ---*/
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            overflow-y: auto;
+        }
+
+        /* Top Welcome Banner */
+        .welcome-banner {
+            background: var(--gradient-main);
+            padding: 30px;
+            border-radius: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        /* Center Frame (About Jilan) */
+        .about-frame {
+            background: var(--card-white);
+            border-radius: 25px;
             padding: 40px;
-            box-shadow: inset 0 0 30px rgba(0, 210, 255, 0.1), 0 0 20px rgba(0, 210, 255, 0.2);
-            animation: borderPulse 4s infinite;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: 0.4s;
+        }
+        .about-frame:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.1);
         }
 
-        .intro-text h2 { font-size: 32px; color: #fff; text-shadow: 0 0 15px var(--neon-blue); margin-bottom: 15px; }
-        .intro-text p { font-size: 14px; line-height: 1.6; color: #94a3b8; text-align: center; }
-
-        @keyframes borderPulse {
-            0%, 100% { border-color: var(--neon-blue); }
-            50% { border-color: #fff; box-shadow: 0 0 40px rgba(0, 210, 255, 0.4); }
+        /* Gaming ID Section - Updated with New Colors */
+        .gaming-id-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .id-boxes { display: flex; gap: 12px; }
+        .id-box {
+            width: 35px; height: 35px;
+            background: #fff;
+            border: 2px solid var(--accent-blue);
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .id-box:hover {
+            background: var(--accent-blue);
+            transform: scale(1.1) rotate(5deg);
+        }
+        .label-text {
+            font-weight: bold;
+            color: var(--accent-blue);
+            letter-spacing: 2px;
+            font-size: 14px;
         }
 
-        /* গেমিং আইডি সেকশন (এখন মাঝখানে) */
-        .gaming-id-section { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .id-boxes { display: flex; gap: 10px; }
-        .id-box { width: 20px; height: 20px; border: 1px solid var(--neon-blue); background: rgba(0, 210, 255, 0.1); transition: 0.3s; }
-        .id-box:hover { background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.1); }
-        .label-text { font-size: 14px; font-weight: bold; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; }
-
-        /* ডান প্যানেল */
-        .right-side { display: flex; gap: 10px; }
-        .s-box { width: 35px; height: 35px; border: 1px solid var(--neon-red); margin-bottom: 10px; }
-        .v-bar { width: 20px; height: 100%; border: 1px solid var(--neon-blue); opacity: 0.3; }
+        /*--- Animations ---*/
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="hanging-spider" style="left: 4%;"><div class="web-line"></div><i class="fas fa-spider spider-icon"></i></div>
-
-    <header class="header-top">
-        <div class="user-info">
-            <h1>HEY, IT'S JILAN</h1>
-            <p style="font-size: 11px; opacity: 0.5;">Digital Identity Protocol Activated</p>
+    <!-- Sidebar Layout -->
+    <aside class="sidebar">
+        <div class="profile-section">
+            <div class="profile-img">
+                <img src="https://placeholder.com" style="width:100%; border-radius:50%;">
+            </div>
+            <h3>Monaemul Islam</h3>
+            <p style="font-size: 12px; opacity: 0.7;">Student</p>
         </div>
-        <div class="profile-glow"></div>
-    </header>
+        <ul class="nav-menu">
+            <li class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</li>
+            <li class="nav-item"><i class="fas fa-user"></i> Profile</li>
+            <li class="nav-item"><i class="fas fa-graduation-cap"></i> Education</li>
+            <li class="nav-item"><i class="fas fa-images"></i> Albums</li>
+            <li class="nav-item"><i class="fas fa-users"></i> Friends</li>
+        </ul>
+        <div style="color: #ef4444; padding: 15px; cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </aside>
 
-    <div class="layout-main">
-        <aside class="left-side">
-            <div class="nav-frame">Social</div>
-            <div class="nav-frame">Relatives</div>
-            <div class="nav-frame">Education</div>
-            <div class="nav-frame">Albums</div>
-            <div class="nav-frame">Friends</div>
-            
-            <!-- কন্টাক্ট সেকশনটি এখানে রয়ে গেল -->
-            <div class="contact-frame">
-                <p>CONTACT ME</p>
-                <span>+880 1XXX XXXXXX</span>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Banner Like Image -->
+        <div class="welcome-banner">
+            <div>
+                <h2>Hello, Monaemul Islam Jilan</h2>
+                <p style="opacity: 0.8; margin-top: 5px;">Ready to learn something new?</p>
             </div>
-        </aside>
+            <i class="fas fa-star" style="font-size: 30px; color: #fbbf24;"></i>
+        </div>
 
-        <main class="center-content">
-            <!-- মেইন পরিচয় ফ্রেম -->
-            <div class="main-intro-frame">
-                <div class="intro-text">
-                    <h2>ABOUT JILAN</h2>
-                    <p>
-                        A passionate gamer and digital enthusiast exploring the boundaries of the virtual world. 
-                        Specialized in dominating battlefields and creating immersive digital experiences. 
-                        Welcome to my universe where skills meet strategy.
-                    </p>
-                </div>
-            </div>
+        <!-- Center About Frame -->
+        <main class="about-frame">
+            <h2 style="color: var(--accent-blue); margin-bottom: 15px;">ABOUT JILAN</h2>
+            <p style="color: #64748b; line-height: 1.8;">
+                A dedicated student and digital creator exploring the intersection of technology and design. 
+                Focusing on building clean, functional, and beautiful user interfaces.
+            </p>
 
-            <!-- গেমিং আইডি এখন ঠিক ফ্রেমের নিচে -->
+            <!-- Gaming IDs Section - Styled like Dashboard Cards -->
             <div class="gaming-id-section">
                 <div class="id-boxes">
-                    <div class="id-box"></div><div class="id-box"></div><div class="id-box"></div>
-                    <div class="id-box"></div><div class="id-box"></div>
+                    <div class="id-box"></div>
+                    <div class="id-box"></div>
+                    <div class="id-box"></div>
+                    <div class="id-box"></div>
+                    <div class="id-box"></div>
                 </div>
                 <div class="label-text">GAMING ID</div>
             </div>
         </main>
-
-        <aside class="right-side">
-            <div class="box-group">
-                <div class="s-box"></div><div class="s-box"></div><div class="s-box"></div>
-            </div>
-            <div class="v-bar"></div>
-        </aside>
     </div>
 
 </body>
