@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jilan | drean gamerz</title>
+    <title>Jilan | Dream Gamerz</title>
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
-    <style>        /* আপনার আগের সব স্টাইল এখানে আছে... */
-
-        /* নতুন CSS এখানে পেস্ট করুন */
-        .page { display: none; animation: fadeIn 0.5s ease-in-out forwards; }
-        /* ... বাকি কোড ... */
-
-    </style> <!-- এখানে CSS শেষ -->
-
+    <style>
         :root { 
             --primary-bg: #f0f4f9;
             --sidebar-bg: #e2e8f0;
@@ -56,7 +50,9 @@
             background: #fff;
             margin: 0 auto 10px;
             border: 3px solid var(--accent-blue);
-            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-menu { list-style: none; flex: 1; }
@@ -70,6 +66,7 @@
             align-items: center;
             gap: 12px;
             color: #475569;
+            text-transform: capitalize;
         }
         .nav-item.active, .nav-item:hover {
             background: #fff;
@@ -87,7 +84,6 @@
             overflow-y: auto;
         }
 
-        /* Top Welcome Banner */
         .welcome-banner {
             background: var(--gradient-main);
             padding: 30px;
@@ -100,7 +96,10 @@
             animation: slideDown 0.8s ease-out;
         }
 
-        /* Center Frame (About Jilan) */
+        /* Pages */
+        .page { display: none; animation: fadeIn 0.5s ease-in-out forwards; width: 100%; }
+        .page.active { display: flex; flex-direction: column; gap: 20px; }
+
         .about-frame {
             background: var(--card-white);
             border-radius: 25px;
@@ -110,137 +109,113 @@
             text-align: center;
             transition: 0.4s;
         }
-        .about-frame:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.1);
-        }
 
-        /* Gaming ID Section - Updated with New Colors */
-        .gaming-id-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+        /* Sub-frames grid */
+        .sub-frame-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
-        .id-boxes { display: flex; gap: 12px; }
-        .id-box {
-            width: 35px; height: 35px;
+
+        .sub-card {
             background: #fff;
-            border: 2px solid var(--accent-blue);
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--accent-blue);
             transition: 0.3s;
-            cursor: pointer;
         }
-        .id-box:hover {
-            background: var(--accent-blue);
-            transform: scale(1.1) rotate(5deg);
-        }
-        .label-text {
-            font-weight: bold;
-            color: var(--accent-blue);
-            letter-spacing: 2px;
-            font-size: 14px;
-        }
+        .sub-card:hover { transform: translateY(-5px); background: var(--accent-blue); color: #fff; }
 
-        /*--- Animations ---*/
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .gaming-id-section { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
+        .id-boxes { display: flex; gap: 12px; }
+        .id-box { width: 35px; height: 35px; background: #fff; border: 2px solid var(--accent-blue); border-radius: 8px; transition: 0.3s; cursor: pointer; }
+        .id-box:hover { background: var(--accent-blue); transform: scale(1.1) rotate(5deg); }
 
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar Layout -->
     <aside class="sidebar">
         <div class="profile-section">
-            <div class="profile-img">
-                <img src="https://placeholder.com" style="width:100%; border-radius:50%;">
-            </div>
+            <div class="profile-img"><i class="fas fa-user-ninja" style="font-size: 30px; color: var(--accent-blue);"></i></div>
             <h3>Monaemul Islam</h3>
-            <p style="font-size: 12px; opacity: 0.7;">Student</p>
+            <p style="font-size: 12px; opacity: 0.7;">Dream Gamer</p>
         </div>
         <ul class="nav-menu">
-            <li class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</li>
-            <li class="nav-item"><i class="fas fa-user"></i> relatives</li>
-            <li class="nav-item"><i class="fas fa-graduation-cap"></i> Education</li>
-            <li class="nav-item"><i class="fas fa-images"></i> Albums</li>
-            <li class="nav-item"><i class="fas fa-users"></i> Friends</li>
+            <li class="nav-item active" onclick="showPage('home')"><i class="fas fa-th-large"></i> Dashboard</li>
+            <li class="nav-item" onclick="showDetails('Relatives')"><i class="fas fa-heart"></i> Relatives</li>
+            <li class="nav-item" onclick="showDetails('Education')"><i class="fas fa-graduation-cap"></i> Education</li>
+            <li class="nav-item" onclick="showDetails('Albums')"><i class="fas fa-images"></i> Albums</li>
+            <li class="nav-item" onclick="showDetails('Friends')"><i class="fas fa-users"></i> Friends</li>
         </ul>
-        <div style="color: #ef4444; padding: 15px; cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</div>
     </aside>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Banner Like Image -->
         <div class="welcome-banner">
             <div>
-                <h2>Hey, welcome to my battle </h2>
-                <p style="opacity: 0.8; margin-top: 5px;">wanna Defeat me?</p>
+                <h2>Hey, welcome to my battle</h2>
+                <p style="opacity: 0.8; margin-top: 5px;">Wanna defeat me?</p>
             </div>
-            <i class="fas fa-star" style="font-size: 30px; color: #fbbf24;"></i>
+            <i class="fas fa-gamepad" style="font-size: 40px; color: #fff;"></i>
         </div>
 
-        <!-- Center About Frame -->
-        <main class="about-frame">
-            <h2 style="color: var(--accent-blue); margin-bottom: 15px;">its JILAN</h2>
-            <p style="color: #64748b; line-height: 1.8;">
-                 "A noob gamer dominating the battlefield with zero skills, exploring something new and curious about the unknown."
-            </p>
-
-            <!-- Gaming IDs Section - Styled like Dashboard Cards -->
-            <div class="gaming-id-section">
-                <div class="id-boxes">
-                    <div class="id-box"></div>
-                    <div class="id-box"></div>
-                    <div class="id-box"></div>
-                    <div class="id-box"></div>
-                    <div class="id-box"></div>
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <main class="about-frame">
+                <h2 style="color: var(--accent-blue); margin-bottom: 15px;">Its JILAN</h2>
+                <p style="color: #64748b; line-height: 1.8;">
+                    "A noob gamer dominating the battlefield with zero skills, exploring something new and curious about the unknown."
+                </p>
+                <div class="gaming-id-section">
+                    <div class="id-boxes"><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div><div class="id-box"></div></div>
+                    <div class="label-text" style="font-weight: bold; color: var(--accent-blue); margin-top: 10px;">GAMING ID</div>
                 </div>
-                <div class="label-text">GAMING ID</div>
-            </div>
-        </main>
+            </main>
+        </div>
+
+        <!-- Detail Page -->
+        <div id="detail-page" class="page">
+            <h2 id="page-title" style="color: var(--accent-blue);">DETAILS</h2>
+            <div class="sub-frame-grid" id="sub-frames"></div>
+            <button onclick="showPage('home')" style="margin-top: 20px; padding: 10px 20px; cursor: pointer; background: var(--accent-blue); color: #fff; border: none; border-radius: 5px;">Back to Dashboard</button>
+        </div>
     </div>
 
-<script>
-    const pages = {
-        'Social': ['Facebook', 'Discord', 'Instagram', 'YouTube'],
-        'Relatives': ['Family Tree', 'Events', 'Contacts'],
-        'Education': ['Schooling', 'Certificates', 'Skills'],
-        'Albums': ['Gaming Highlights', 'Personal', 'Tournaments'],
-        'Friends': ['Team Alpha', 'Steam Buds', 'Discord Squad']
-    };
-
-    function showDetails(category) {
-        document.getElementById('home-page').classList.remove('active');
-        document.getElementById('detail-page').classList.add('active');
-        document.getElementById('page-title').innerText = category.toUpperCase();
-        
-        const grid = document.getElementById('sub-frames');
-        grid.innerHTML = ''; // আগের কন্টেন্ট মুছবে
-
-        pages[category].forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'sub-card';
-            card.innerHTML = `<h3>${item}</h3><p>View Details</p>`;
-            grid.appendChild(card);
-        });
-    }
-
-    function goBack() {
-        document.getElementById('detail-page').classList.remove('active');
-        document.getElementById('home-page').classList.add('active');
-    }
-
-    // বাম পাশের ফ্রেমগুলোতে ক্লিক ইভেন্ট সেট করা
-    document.querySelectorAll('.nav-frame').forEach(frame => {
-        frame.onclick = function() {
-            const name = this.querySelector('span').innerText;
-            showDetails(name);
+    <script>
+        const pagesData = {
+            'Relatives': ['Family Tree', 'Events', 'Contacts'],
+            'Education': ['Schooling', 'Certificates', 'Skills'],
+            'Albums': ['Gaming Highlights', 'Personal', 'Tournaments'],
+            'Friends': ['Team Alpha', 'Steam Buds', 'Discord Squad']
         };
-    });
-</script>
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            // Sidebar active state change
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if(pageId === 'home') document.querySelector('.nav-item').classList.add('active');
+        }
+
+        function showDetails(category) {
+            showPage('detail');
+            document.getElementById('page-title').innerText = category.toUpperCase();
+            const grid = document.getElementById('sub-frames');
+            grid.innerHTML = ''; 
+
+            pagesData[category].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'sub-card';
+                card.innerHTML = `<i class="fas fa-star" style="margin-bottom:10px;"></i><h3>${item}</h3><p>View Info</p>`;
+                grid.appendChild(card);
+            });
+        }
+    </script>
 </body>
 </html>
