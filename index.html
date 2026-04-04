@@ -3,271 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jilan | Ultimate Gaming Multiverse</title>
-    <!-- External Libraries -->
+    <title>Jilan | Wireframe Layout</title>
     <link rel="stylesheet" href="https://cloudflare.com">
-    <link href="https://unpkg.com" rel="stylesheet">
     
-    <style>/*--- ঝুলন্ত মাকড়সা অ্যানিমেশন ---*/
-.hanging-spider {
-    position: fixed; top: -50px; z-index: 1000;
-    display: flex; flex-direction: column; align-items: center;
-    animation: swing 4s ease-in-out infinite;
-}
-.web-line { width: 1px; height: 180px; background: rgba(255, 255, 255, 0.4); }
-.spider-icon {
-    font-size: 35px; color: #ff0055;
-    filter: drop-shadow(0 0 10px #ff0055);
-    animation: glow 2s ease-in-out infinite;
-}
-@keyframes swing {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(40px) rotate(8deg); }
-}
-@keyframes glow {
-    0%, 100% { filter: drop-shadow(0 0 5px #ff0055); transform: scale(1); }
-    50% { filter: drop-shadow(0 0 20px #ff0055); transform: scale(1.1); }
-}
-/*--- Dream Gamer Card Special Animation ---*/
-.dream-card {
-    background: #000;
-    border-radius: 25px;
-    padding: 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #00d2ff; /* নীল বর্ডার */
-    transition: 0.5s;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-}
-
-/* মাউস নিলে বর্ডার জ্বলবে এবং কার্ডটি বড় হবে */
-.dream-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 30px #00d2ff;
-    border-color: #fff;
-}
-
-/* কার্ডের ভেতরের টেক্সট স্টাইল */
-.dream-card h2 {
-    font-size: 28px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
-.dream-card p {
-    font-size: 16px;
-    color: #00d2ff;
-    opacity: 0.8;
-}
-
-/* সাইডের নীল ইফেক্ট (আপনার ছবির মতো) */
-.dream-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.4), transparent);
-    transition: 0.5s;
-}
-
-.dream-card:hover::before {
-    left: 100%;
-}
-
+    <style>
+        /*--- আপনার দেওয়া মূল ভেরিয়েবল এবং বেসিক স্টাইল ---*/
         :root { 
             --neon-blue: #00d2ff; 
             --neon-red: #ff0055; 
             --dark-bg: #020617; 
-            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; cursor: crosshair; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
         
         body { 
             background-color: var(--dark-bg); 
             color: white; 
-            overflow-x: hidden; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #020617 100%);
         }
 
-        /*--- 1. Cyberpunk Background Particles ---*/
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; }
-
-        /*--- 2. Neon Hanging Spiders ---*/
-        .hanging-spider { position: fixed; top: -10px; z-index: 100; animation: swing 5s ease-in-out infinite; }
-        .web-line { width: 1.5px; height: 180px; background: linear-gradient(to bottom, transparent, var(--neon-blue)); margin: 0 auto; }
-        .spider-icon { 
-            font-size: 35px; color: var(--neon-red); 
-            filter: drop-shadow(0 0 15px var(--neon-red)); 
-            animation: pulse 2s infinite;
+        /*--- আপনার ঝুলন্ত মাকড়সা অ্যানিমেশন (অপরিবর্তিত) ---*/
+        .hanging-spider {
+            position: fixed; top: -50px; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center;
+            animation: swing 4s ease-in-out infinite;
+        }
+        .web-line { width: 1px; height: 180px; background: rgba(255, 255, 255, 0.4); }
+        .spider-icon {
+            font-size: 35px; color: #ff0055;
+            filter: drop-shadow(0 0 10px #ff0055);
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes swing {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(40px) rotate(8deg); }
+        }
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px #ff0055); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px #ff0055); transform: scale(1.1); }
         }
 
-        @keyframes swing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; } }
-
-        /*--- 3. Gaming Sidebar (Glow Effect) ---*/
-        .sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
-        .side-item { 
-            width: 55px; height: 55px; border-radius: 15px; background: #000; 
-            border: 2px solid var(--neon-blue); cursor: pointer; transition: 0.4s; overflow: hidden;
-            box-shadow: 0 0 10px var(--neon-blue);
+        /*--- ১. Top Navigation (স্কেচ অনুযায়ী) ---*/
+        .top-nav {
+            height: 80px; display: flex; justify-content: space-between; align-items: center;
+            padding: 0 50px; border-bottom: 1px solid rgba(0, 210, 255, 0.1);
         }
-        .side-item:hover { transform: scale(1.2) rotate(10deg); box-shadow: 0 0 25px var(--neon-blue); border-color: white; }
-        .side-item img { width: 100%; height: 100%; object-fit: cover; }
-
-        /*--- 4. Animated Gaming Header (Your Photo) ---*/
-        .header-box {
-            width: 90%; max-width: 1100px; margin: 40px auto;
-            background: linear-gradient(90deg, rgba(0,210,255,0.1), rgba(255,0,85,0.1));
-            backdrop-filter: blur(15px);
-            padding: 30px; border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        }
-
-        .user-text h2 { font-size: 28px; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-blue); }
-        .user-text p { font-size: 14px; color: #94a3b8; margin-top: 5px; }
+        .nav-tabs { display: flex; gap: 15px; }
+        .tab-box { width: 50px; height: 15px; border: 1px solid var(--neon-blue); opacity: 0.5; }
         
-        /* Your Profile with Rotating Border */
-        .profile-glow {
-            width: 85px; height: 85px; border-radius: 50%;
-            padding: 4px; background: linear-gradient(45deg, var(--neon-blue), var(--neon-red));
-            animation: rotate-border 4s linear infinite;
+        /* আপনার ছবির মতো প্রোফাইল গ্লো */
+        .profile-small {
+            width: 55px; height: 55px; border-radius: 50%;
+            border: 2px solid var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
         }
-        .profile-glow img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #000; }
 
-        @keyframes rotate-border { 100% { filter: hue-rotate(360deg); } }
+        /*--- ২. Main Layout (Sidebar + Center Content + Right Panel) ---*/
+        .layout-body { display: flex; flex: 1; padding: 20px; gap: 20px; }
 
-        /*--- 5. Gaming Dashboard Cards ---*/
-        .container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
-        .card { 
-            background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.05); 
-            padding: 40px; border-radius: 25px; text-align: center;
-            transition: 0.5s; position: relative; overflow: hidden;
+        /* Left Sidebar (৫টি আইকন বক্স + gaming id লেখা) */
+        .left-sidebar { width: 80px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .side-box { width: 45px; height: 45px; border: 1px solid var(--neon-blue); cursor: pointer; transition: 0.3s; }
+        .side-box:hover { box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.1); background: rgba(0, 210, 255, 0.1); }
+        .gaming-id-text { writing-mode: vertical-rl; text-transform: uppercase; color: var(--neon-blue); font-weight: bold; margin-top: 15px; font-size: 14px; }
+
+        /* Center Content (আপনার কার্ডগুলো এখানে থাকবে) */
+        .main-content { 
+            flex: 1; display: flex; flex-direction: column; gap: 20px; 
+            justify-content: center; align-items: center;
         }
-        .card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--neon-blue));
-            animation: rotate-card 4s linear infinite; opacity: 0;
+
+        /* আপনার দেওয়া Dream Card স্টাইল */
+        .dream-card {
+            width: 100%; max-width: 600px;
+            background: rgba(255, 255, 255, 0.03); border-radius: 20px;
+            padding: 30px; text-align: center; position: relative; overflow: hidden;
+            border: 1px solid rgba(0, 210, 255, 0.2); transition: 0.5s;
         }
-        .card:hover::before { opacity: 1; }
-        .card:hover { transform: translateY(-15px); background: rgba(0,0,0,0.6); box-shadow: 0 0 20px var(--neon-blue); }
-        
-        .card-content { position: relative; z-index: 1; background: var(--dark-bg); border-radius: 20px; padding: 20px; }
-        .card i { font-size: 45px; color: var(--neon-red); margin-bottom: 20px; }
+        .dream-card:hover { transform: translateY(-5px); box-shadow: 0 0 25px var(--neon-blue); border-color: #fff; }
+        .dream-card h2 { font-size: 22px; color: #fff; letter-spacing: 2px; }
+        .dream-card p { font-size: 14px; color: var(--neon-blue); opacity: 0.7; }
 
-        @keyframes rotate-card { 100% { transform: rotate(360deg); } }
-
-        /*--- 6. Typing Intro Text ---*/
-        .typing-container { font-size: 1.5rem; text-align: center; margin-bottom: 20px; color: var(--neon-red); }
+        /* Right Panel (৩টি বক্স + ভার্টিক্যাল বার) */
+        .right-panel { display: flex; gap: 10px; }
+        .small-boxes { display: flex; flex-direction: column; gap: 12px; }
+        .s-box { width: 40px; height: 40px; border: 1px solid var(--neon-red); }
+        .v-bar { width: 25px; height: 100%; border: 1px solid var(--neon-blue); opacity: 0.3; }
 
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
-
-    <!-- Hanging Spiders -->
+    <!-- আপনার মাকড়সাগুলো ঠিক আগের জায়গায় থাকবে -->
     <div class="hanging-spider" style="left: 10%;"><div class="web-line"></div><i class="fas fa-spider spider-icon"></i></div>
-    <div class="hanging-spider" style="right: 10%;"><div class="web-line" style="height: 250px;"></div><i class="fas fa-spider spider-icon"></i></div>
+    <div class="hanging-spider" style="right: 15%;"><div class="web-line" style="height: 120px;"></div><i class="fas fa-spider spider-icon"></i></div>
 
-    <!-- Sidebar Gaming Icons -->
-    <!-- ১. ওপরের ব্যানার সেকশন -->
-<!-- ১. ওপরের ব্যানার সেকশন (Hey, It's Jilan এবং Blue Glow ছবিসহ) -->
-<div class="header-box" data-aos="fade-down" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); margin: 30px auto; width: 90%; max-width: 1100px;">
-    
-    <div class="user-text">
-        <h1 style="color: #00d2ff; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
-            Hey, It's Jilan
-        </h1>
-        <p style="font-size: 12px; opacity: 0.6; margin-top: 5px; color: #fff; letter-spacing: 1px;">
-            Welcome to the digital universe.
-        </p>
-    </div>
-
-    <!-- প্রোফাইল ছবি: আগের মতো নীল গ্লো ইফেক্ট -->
-    <div class="profile-glow" style="width: 75px; height: 75px; border-radius: 50%; border: 3px solid #00d2ff; box-shadow: 0 0 20px rgba(0, 210, 255, 0.6); overflow: hidden; display: flex; justify-content: center; align-items: center;">
-        <img src="jilanpic.jpg" alt="Jilan" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-</div>
-
-<!-- ২. কার্ড সেকশন (DREAM GAMER কার্ডসহ) -->
-<div class="container">
-    <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto;">
-        
-        <div class="card" data-aos="fade-up" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 25px; text-align: center; transition: 0.4s;">
-            <div class="card-content">
-                <i class="fas fa-gamepad" style="font-size: 40px; color: #00d2ff; margin-bottom: 15px;"></i>
-                <h3 style="font-size: 22px; color: #fff; margin-bottom: 10px;">DREAM GAMER</h3>
-                <p style="font-size: 14px; opacity: 0.7;">Dominating the battlefield with ZERO skills.</p>
-            </div>
+    <!-- ১. উপরের বার (Top Nav) -->
+    <header class="top-nav">
+        <div style="width: 55px;"></div> 
+        <div class="nav-tabs">
+            <div class="tab-box"></div><div class="tab-box"></div><div class="tab-box"></div>
         </div>
+        <div class="profile-small"></div>
+    </header>
 
-    </div>
-</div>
+    <!-- ২. মেইন লেআউট (স্কেচ অনুযায়ী) -->
+    <div class="layout-body">
+        <!-- বাম পাশের সাইডবার -->
+        <aside class="left-sidebar">
+            <div class="side-box"></div><div class="side-box"></div><div class="side-box"></div>
+            <div class="side-box"></div><div class="side-box"></div>
+            <div class="gaming-id-text">GAMING ID</div>
+        </aside>
 
-        <!-- অতিরিক্ত কার্ড যোগ করতে পারেন -->
-    </div>
-</div>
-
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-content">
-                    <i class="fas fa-spider"></i>
-                    <h3>SPIDEY SENSE</h3>
-                    <p>not peter parker.</p>
-                </div>
+        <!-- মাঝখানের কন্টেন্ট (আপনার কার্ড) -->
+        <main class="main-content">
+            <h1 style="color: var(--neon-blue); margin-bottom: 20px;">HEY, IT'S JILAN</h1>
+            
+            <div class="dream-card">
+                <h2>DREAM GAMER</h2>
+                <p>Dominating the battlefield with ZERO skills.</p>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-content">
-                    <i class="fas fa-shield-virus"></i>
-                    <h3>BACK BANCHER</h3>
-                    <p>Protecting the digital world from threats.</p>
-                </div>
+
+            <div class="dream-card">
+                <h2>SPIDEY SENSE</h2>
+                <p>not peter parker.</p>
             </div>
-        </div>
+        </main>
+
+        <!-- ডান পাশের প্যানেল -->
+        <aside class="right-panel">
+            <div class="small-boxes">
+                <div class="s-box"></div><div class="s-box"></div><div class="s-box"></div>
+            </div>
+            <div class="v-bar"></div>
+        </aside>
     </div>
 
-    <!-- External Scripts -->
-    <script src="https://jsdelivr.net"></script>
-    <script src="https://unpkg.com"></script>
-    <script>
-        // AOS Animation
-        AOS.init({ duration: 1200 });
-
-        // Typing Effect
-        const text = "MONAEMUL ISLAM JILAN";
-        let idx = 0;
-        function type() {
-            if (idx < text.length) {
-                document.getElementById("typing").innerHTML += text.charAt(idx);
-                idx++;
-                setTimeout(type, 150);
-            }
-        }
-        window.onload = type;
-
-        // Particle Background (Neon Web)
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 90 },
-                color: { value: '#00d2ff' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.3 },
-                size: { value: 2 },
-                line_linked: { enable: true, distance: 150, color: '#ff0055', opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 3 }
-            }
-        });
-
-        function copyID(id) {
-            navigator.clipboard.writeText(id);
-            alert("Gaming ID Copied: " + id);
-        }
-    </script>
 </body>
 </html>
+
