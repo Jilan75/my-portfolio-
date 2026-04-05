@@ -136,6 +136,36 @@
 
         @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        /* সোশ্যাল মিডিয়ার অরিজিনাল কালার */
+.fa-facebook { color: #1877F2 !important; }
+.fa-youtube { color: #FF0000 !important; }
+.fa-instagram { 
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.fa-whatsapp { color: #25D366 !important; }
+.fa-twitter { color: #1DA1F2 !important; }
+
+/* সোশ্যাল কার্ডের সুন্দর ডিজাইন */
+.social-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.4s;
+    text-decoration: none;
+    display: block;
+}
+.social-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+.social-card i { font-size: 50px; margin-bottom: 10px; }
+.social-card h3 { color: #fff; font-family: 'Orbitron'; font-size: 13px; }
+
     </style>
 </head>
 <body>
@@ -151,7 +181,9 @@
             <li class="nav-item" onclick="showDetails('Relatives')"><i class="fas fa-heart"></i> Relatives</li>
             <li class="nav-item" onclick="showDetails('Education')"><i class="fas fa-graduation-cap"></i> Education</li>
             <li class="nav-item" onclick="showDetails('Albums')"><i class="fas fa-images"></i> Albums</li>
-            <li class="nav-item" onclick="showDetails('Friends')"><i class="fas fa-users"></i> Friends</li>
+            <li class="nav-item" onclick="showSocial()"><i class="fas fa-share-alt"></i> Social</li>
+           <li class="nav-item" onclick="showDetails('Friends')"><i class="fas fa-users"></i> Friends</li>
+
         </ul>
     </aside>
 
@@ -217,5 +249,43 @@
             });
         }
     </script>
+    <script>
+    // এখানে আপনার প্রোফাইল লিঙ্কগুলো বসান
+    const mySocialLinks = {
+        facebook: "আপনার_ফেসবুক_লিঙ্ক_এখানে",
+        youtube:  "আপনার_ইউটিউব_লিঙ্ক_এখানে",
+        instagram: "আপনার_ইন্সটাগ্রাম_লিঙ্ক_এখানে",
+        twitter:   "আপনার_টুইটার_লিঙ্ক_এখানে",
+        whatsapp:  "https://wa.me" // আপনার ফোন নম্বর এখানে দিন
+    };
+
+    function showSocial() {
+        // ডিটেইলস পেজ দেখাবে
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('detail-page').classList.add('active');
+        
+        document.getElementById('page-title').innerText = "SOCIAL MEDIA PROTOCOL";
+        const grid = document.getElementById('sub-frames');
+        grid.innerHTML = ''; 
+
+        const socials = [
+            { name: 'Facebook', icon: 'fa-facebook', url: mySocialLinks.facebook },
+            { name: 'YouTube', icon: 'fa-youtube', url: mySocialLinks.youtube },
+            { name: 'Instagram', icon: 'fa-instagram', url: mySocialLinks.instagram },
+            { name: 'Twitter', icon: 'fa-twitter', url: mySocialLinks.twitter },
+            { name: 'WhatsApp', icon: 'fa-whatsapp', url: mySocialLinks.whatsapp }
+        ];
+
+        socials.forEach(item => {
+            const card = document.createElement('a');
+            card.href = item.url;
+            card.target = "_blank"; // নতুন ট্যাবে লিঙ্কটি খুলবে
+            card.className = "social-card";
+            card.innerHTML = `<i class="fab ${item.icon}"></i><h3>${item.name}</h3>`;
+            grid.appendChild(card);
+        });
+    }
+</script>
+
 </body>
 </html>
