@@ -165,6 +165,92 @@
 }
 .social-card i { font-size: 50px; margin-bottom: 10px; }
 .social-card h3 { color: #fff; font-family: 'Orbitron'; font-size: 13px; }
+/* স্লাইডশো পপ-আপ (Lightbox) ব্যাকগ্রাউন্ড */
+.lightbox {
+    display: none; /* প্রথমে লুকোনো থাকবে */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* স্লাইডশো কন্টেইনার */
+.lightbox-content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ছবির স্মুথ নড়াচড়া ও অ্যানিমেশন ইফেক্ট */
+.lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(255,255,255,0.2);
+    
+    /* অ্যানিমেশনের মূল ট্রিক: প্রথমে হালকা ছোট ও অদৃশ্য থাকবে */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ছবি লোড হলে নড়ে উঠে দৃশ্যমান হবে */
+.lightbox-img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* বন্ধ করার ক্লোজ বোতাম */
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* ডানে-বামে যাওয়ার বোতাম (Next & Prev) */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.prev-btn { left: -80px; }
+.next-btn { right: -80px; }
+
+/* মোবাইলের জন্য স্ক্রিন এডজাস্টমেন্ট */
+@media (max-width: 768px) {
+    .nav-btn {
+        padding: 10px 15px;
+        font-size: 18px;
+    }
+    .prev-btn { left: -40px; }
+    .next-btn { right: -40px; }
+}
 
     </style>
 </head>
@@ -284,8 +370,74 @@
             card.innerHTML = `<i class="fab ${item.icon}"></i><h3>${item.name}</h3>`;
             grid.appendChild(card);
         });
+    }// আপনার বর্তমান গ্যালারির ক্লাসের নাম অনুযায়ী (.gallery-item img) পরিবর্তন করতে পারেন
+// এটি গ্যালারির সব ছবির লিংক একসঙ্গে ধরে রাখবে
+const images = Array.from(document.querySelectorAll('.gallery-item img')).map(img => img.src);
+let currentIndex = 0;
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+// স্লাইডশো ওপেন করার ফাংশন
+function openLightbox(index) {
+    currentIndex = index;
+    updateLightboxImage();
+    lightbox.style.display = 'flex';
+}
+
+// স্লাইডশো বন্ধ করার ফাংশن
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.classList.remove('active');
+}
+
+// ছবি পরিবর্তন করার ফাংশন (ডান/বাম)
+function changeImage(direction) {
+    // নতুনের জন্য পুরনো অ্যানিমেশন রিমুভ করা হচ্ছে
+    lightboxImg.classList.remove('active');
+    
+    setTimeout(() => {
+        currentIndex += direction;
+        if (currentIndex >= images.length) currentIndex = 0; 
+        if (currentIndex < 0) currentIndex = images.length - 1; 
+        
+        updateLightboxImage();
+    }, 100); // ১০০ মিলি-সেকেন্ডের ডিলে যাতে ছবি স্লাইড হওয়ার নড়াচড়াটি দারুণ দেখায়
+}
+
+// নতুন ছবি লোড করে অ্যানিমেশন দেওয়ার ফাংশন
+function updateLightboxImage() {
+    lightboxImg.src = images[currentIndex];
+    lightboxImg.onload = () => {
+        lightboxImg.classList.add('active'); // ছবি লোড শেষ হলে নড়াচড়া সচল হবে
+    };
+}
+
+// কীবোর্ডের তীর (Arrow Keys) দিয়েও কন্ট্রোল করা যাবে
+document.addEventListener('keydown', function(e) {
+    if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'Escape') closeLightbox();
     }
+});
+
 </script>
+<!-- 🖼️ স্লাইডশো পপ-আপ বা লাইটবক্স স্ট্রাকচার -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <!-- বন্ধ করার বোতাম -->
+        <button class="close-btn" onclick="closeLightbox()">&times;</button>
+        <!-- আগের ছবির বোতাম -->
+        <button class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</button>
+        
+        <!-- মূল ছবি (অ্যানিমেশন সহ) -->
+        <img src="" alt="Slideshow" class="lightbox-img" id="lightbox-img">
+        
+        <!-- পরের ছবির বোতাম -->
+        <button class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</button>
+    </div>
+</div>
 
 </body>
 </html>
