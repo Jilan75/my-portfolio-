@@ -146,6 +146,17 @@
 }
 .fa-whatsapp { color: #25D366 !important; }
 .fa-twitter { color: #1DA1F2 !important; }
+/* স্পাইডার জালের নিচের ছোট্ট মাকড়সা */
+.spider-web::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+}
 
 /* সোশ্যাল কার্ডের সুন্দর ডিজাইন */
 .social-card {
@@ -438,6 +449,56 @@ document.addEventListener('keydown', function(e) {
         <button class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</button>
     </div>
 </div>
+<!-- ==========================================
+     আপনার নতুন ফিচারগুলোর জন্য জাভাস্ক্রিপ্ট কোড 
+     ========================================== -->
+<script>
+// ১. গেমিং আইডি পপআপ কন্ট্রোল (অন্য পেজে যাবে না, ওপরেই শো করবে)
+function openGamePopup(title, details) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-details').innerText = details;
+    document.getElementById('gameModal').style.display = 'flex';
+}
+function closeGamePopup() {
+    document.getElementById('gameModal').style.display = 'none';
+}
+
+// ২. ফ্যামিলি মেম্বারদের নামের বিবরণী হাইড/শো করা
+function toggleBio(id) {
+    const bio = document.getElementById(id);
+    if(bio.style.display === 'block') {
+        bio.style.display = 'none';
+    } else {
+        document.querySelectorAll('.bio-text').forEach(b => b.style.display = 'none');
+        bio.style.display = 'block';
+    }
+}
+
+// ৩. অ্যালবাম স্লাইডশো কন্ট্রোল
+let slideIndex = 0;
+function plusSlides(n) {
+    const slides = document.getElementsByClassName("mySlides");
+    if(slides.length === 0) return;
+    slides[slideIndex].classList.remove('active-slide');
+    slideIndex = (slideIndex + n + slides.length) % slides.length;
+    slides[slideIndex].classList.add('active-slide');
+}
+
+// ৪. স্পাইডার অ্যানিমেশন জেনারেট করার স্ক্রিপ্ট
+function initSpiders() {
+    const container = document.getElementById('spider-container');
+    if(!container) return;
+    for (let i = 0; i < 5; i++) { 
+        let web = document.createElement('div');
+        web.classList.add('spider-web');
+        web.style.left = (Math.random() * 90 + 5) + 'vw';
+        web.style.height = (Math.random() * 200 + 80) + 'px';
+        web.style.animationDelay = (Math.random() * 3) + 's';
+        container.appendChild(web);
+    }
+}
+window.addEventListener('DOMContentLoaded', initSpiders);
+</script>
 
 </body>
 </html>
